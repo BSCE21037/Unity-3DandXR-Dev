@@ -10,16 +10,26 @@ public class CharacterController : MonoBehaviour
 	public float w_speed, wb_speed, olw_speed, rn_speed, ro_speed;
 	public bool walking;    //walikng check
 	public Transform playerTrans;
+
+	[SerializeField] private float xRange = 45f;
+	[SerializeField] private float zRange = 45f;
 	
 	
 	void FixedUpdate(){
         //move forward
 		if(Input.GetKey(KeyCode.W)){
-			playerRigid.velocity = transform.forward * w_speed * Time.deltaTime;
+			playerRigid.velocity = playerTrans.forward * w_speed * Time.deltaTime;
 		}
         //move backward
 		if(Input.GetKey(KeyCode.S)){
-			playerRigid.velocity = -transform.forward * wb_speed * Time.deltaTime;
+			playerRigid.velocity = -playerTrans.forward * wb_speed * Time.deltaTime;
+		}
+		if(Input.GetKey(KeyCode.A)){
+			playerTrans.Rotate(0, -ro_speed * Time.deltaTime, 0);
+		}
+        //move backward
+		if(Input.GetKey(KeyCode.D)){
+			playerTrans.Rotate(0, ro_speed * Time.deltaTime, 0);
 		}
 	}
 	void Update(){
@@ -47,13 +57,29 @@ public class CharacterController : MonoBehaviour
 			playerAnim.SetTrigger("Idle");
 		}
         //ROTATION MOVEMENT
-		if(Input.GetKey(KeyCode.A)){
+		if(Input.GetKeyDown(KeyCode.A)){
             //rotate left on the Y axis
-			playerTrans.Rotate(0, -ro_speed * Time.deltaTime, 0);
+			
+			playerAnim.SetTrigger("Left");
+			playerAnim.ResetTrigger("Idle");
+			
 		}
-		if(Input.GetKey(KeyCode.D)){
+		if(Input.GetKeyUp(KeyCode.A)){
+			//Stopped rotating left
+			playerAnim.ResetTrigger("Left");
+			playerAnim.SetTrigger("Idle");
+		}
+		if(Input.GetKeyDown(KeyCode.D)){
             //rotate right on the Y axis
-			playerTrans.Rotate(0, ro_speed * Time.deltaTime, 0);
+			
+			playerAnim.SetTrigger("Right");
+			playerAnim.ResetTrigger("Idle");
+			
+		}
+		if(Input.GetKeyUp(KeyCode.D)){
+			//Stopped rotating right
+			playerAnim.ResetTrigger("Right");
+			playerAnim.SetTrigger("Idle");
 		}
         //SPRINTING
 		if(walking == true){				
@@ -70,7 +96,7 @@ public class CharacterController : MonoBehaviour
 				playerAnim.SetTrigger("Walk");
 			}
 		}
+		//CLAMPING
+		transform.position = new Vector3(Mathf.Clamp(transform.position.x, -xRange, xRange), transform.position.y, Mathf.Clamp(transform.position.z, -zRange, zRange));
 	}
 }
-
-
