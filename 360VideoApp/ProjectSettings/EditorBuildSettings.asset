@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: 641ec9db75d078d4790e0fcf57925309
+  - enabled: 1
+    path: Assets/Scenes/PoppyFields.unity
+    guid: 145a2a45d7bc746b19cb68410368bf96
+  - enabled: 1
+    path: Assets/Scenes/Space.unity
+    guid: 188516a4aa1ddec4fb1f5eaed01636d9
+  - enabled: 1
+    path: Assets/Scenes/IstanbulTour.unity
+    guid: e7846b4b39d7b0142b01d6ad0c6e84ce
+  - enabled: 1
+    path: Assets/Scenes/MountainBike.unity
+    guid: 1db87bfc691e5a4489107aae95bbe921
+  m_configObjects:
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 069525f107e764c41a21d46698edd5bd, type: 2}
